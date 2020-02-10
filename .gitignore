@@ -25,3 +25,4 @@ yarn-error.log*
 # config
 config.ts
 /src/config.ts
+.now

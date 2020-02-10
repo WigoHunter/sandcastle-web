@@ -3,12 +3,19 @@ import { gql } from "apollo-boost";
 export const getUserProfile = gql`
   query GET_USER_PROFILE($profileHandle: String!) {
     User(where: { profile_handle: { _eq: $profileHandle } }) {
-      id
       first_name
       last_name
-      title
       company
+      title
       logo_image_url
+      number
+      website_url
+      linkedin_url
+      facebook_url
+      profile_picture
+      motto
+      cover_picture
+      profile_handle
     }
   }
 `;

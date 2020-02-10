@@ -1,0 +1,53 @@
+.App-header
+  background-color: #282c34
+  min-height: 100vh
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: center
+  font-size: calc(10px + 2vmin)
+  color: white
+
+.profile-page
+  display: flex
+
+  & .cover
+    position: fixed
+    top: 0
+    left: 0
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, .3)
+    z-index: 0
+
+  & .profile-card
+    z-index: 100
+    background-color: rgba(256, 256, 256, .9)
+    height: 450px
+    width: 300px
+    margin: calc(40vh - 160px) auto 0
+    border-radius: 10px
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, .3)
+    box-sizing: border-box
+    padding: 20px
+
+    & .profile-pic
+      border-radius: 50%
+      margin-top: 10px
+
+    & h2
+      font-size: 32px
+      font-weight: 600
+      margin: 12px 0 0
+
+    & .company
+      display: flex
+      flex-direction: row
+      align-items: center
+      padding: 0 3px
+      margin: 6px 0
+
+      & img
+        height: 28px
+        margin-right: 12px
+
+      & p
+        font-size: 18px

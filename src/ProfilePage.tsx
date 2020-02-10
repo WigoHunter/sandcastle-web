@@ -10,16 +10,12 @@ import {
 const ProfilePage = () => {
   const { id } = useParams();
 
-  if (!id) {
-    return <div>no profile id detected</div>;
-  }
-
   const { loading, error, data } = useQuery<
     Get_User_ProfileQuery,
     Get_User_ProfileQueryVariables
   >(getUserProfile, {
     variables: {
-      profileHandle: id
+      profileHandle: id || ""
     }
   });
 
@@ -40,11 +36,45 @@ const ProfilePage = () => {
     return <div>can't find the user</div>;
   }
 
-  const user = users[0];
+  const {
+    cover_picture,
+    profile_picture,
+    first_name,
+    last_name,
+    logo_image_url,
+    company
+  } = users[0];
 
   return (
-    <div>
-      {user.first_name} {user.last_name}
+    <div className="profile-page">
+      <div
+        className="cover"
+        style={{
+          background: `url(${cover_picture})`,
+          backgroundSize: "cover",
+          height: "40vh",
+          width: "100vw"
+        }}
+      />
+      <div className="profile-card">
+        <div
+          className="profile-pic"
+          style={{
+            background: `url(${profile_picture})`,
+            backgroundSize: "cover",
+            height: "70px",
+            width: "70px"
+          }}
+        />
+        <h2>
+          {first_name} {last_name}
+        </h2>
+
+        <div className="company">
+          {logo_image_url && <img src={logo_image_url} />}
+          <p>{company}</p>
+        </div>
+      </div>
     </div>
   );
 };
