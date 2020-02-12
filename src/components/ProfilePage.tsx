@@ -1,11 +1,11 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/react-hooks";
-import { getUserProfile } from "./data/queries";
+import { getUserProfile } from "../data/queries";
 import {
   Get_User_ProfileQuery,
   Get_User_ProfileQueryVariables
-} from "./generated/graphql";
+} from "../generated/graphql";
 
 const ProfilePage = () => {
   const { id } = useParams();
@@ -71,7 +71,7 @@ const ProfilePage = () => {
         </h2>
 
         <div className="company">
-          {logo_image_url && <img src={logo_image_url} />}
+          {logo_image_url && <img src={logo_image_url} alt="company logo" />}
           <p>{company}</p>
         </div>
       </div>
