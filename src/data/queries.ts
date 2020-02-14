@@ -7,6 +7,7 @@ export const getUserProfile = gql`
       last_name
       company
       title
+      address
       logo_image_url
       number
       website_url

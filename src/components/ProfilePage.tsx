@@ -42,7 +42,10 @@ const ProfilePage = () => {
     first_name,
     last_name,
     logo_image_url,
-    company
+    address,
+    title,
+    number,
+    motto
   } = users[0];
 
   return (
@@ -56,6 +59,7 @@ const ProfilePage = () => {
           width: "100vw"
         }}
       />
+      <div className="new-contact">New contact added!</div>
       <div className="profile-card">
         <div
           className="profile-pic"
@@ -71,10 +75,28 @@ const ProfilePage = () => {
         </h2>
 
         <div className="company">
-          {logo_image_url && <img src={logo_image_url} alt="company logo" />}
-          <p>{company}</p>
+          {logo_image_url && (
+            <div
+              className="logo"
+              style={{
+                background: `url(${logo_image_url})`,
+                backgroundSize: "cover",
+                height: "28px",
+                width: "68%"
+              }}
+            />
+          )}
+          <div className="line" />
+          <p>{title}</p>
+        </div>
+
+        <div className="contact">
+          <div>Address: {address}</div>
+          <div>Mobile: {number}</div>
+          <div>Email: kh736@cornell.edu</div>
         </div>
       </div>
+      <div className="motto">{motto}</div>
     </div>
   );
 };

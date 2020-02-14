@@ -422,7 +422,7 @@ export type Get_User_ProfileQuery = (
   { __typename?: 'query_root' }
   & { User: Array<(
     { __typename?: 'User' }
-    & Pick<User, 'first_name' | 'last_name' | 'company' | 'title' | 'logo_image_url' | 'number' | 'website_url' | 'linkedin_url' | 'facebook_url' | 'profile_picture' | 'motto' | 'cover_picture' | 'profile_handle'>
+    & Pick<User, 'first_name' | 'last_name' | 'company' | 'title' | 'address' | 'logo_image_url' | 'number' | 'website_url' | 'linkedin_url' | 'facebook_url' | 'profile_picture' | 'motto' | 'cover_picture' | 'profile_handle'>
   )> }
 );
 
@@ -434,6 +434,7 @@ export const Get_User_ProfileDocument = gql`
     last_name
     company
     title
+    address
     logo_image_url
     number
     website_url
