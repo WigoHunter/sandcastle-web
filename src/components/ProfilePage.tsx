@@ -93,6 +93,7 @@ const ProfilePage = () => {
         <div className="contact">
           <div>Address: {address}</div>
           <div>Mobile: {number}</div>
+          {/* to fix */}
           <div>Email: kh736@cornell.edu</div>
         </div>
       </div>
