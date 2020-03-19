@@ -1,7 +1,7 @@
 import { gql } from "apollo-boost";
 
 export const getUserProfile = gql`
-  query GET_USER_PROFILE($profileHandle: String!) {
+  query GET_USER_PROFILE($profileHandle: String) {
     User(where: { profile_handle: { _eq: $profileHandle } }) {
       first_name
       last_name

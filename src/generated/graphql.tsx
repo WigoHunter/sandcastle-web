@@ -414,7 +414,7 @@ export type Uuid_Comparison_Exp = {
 };
 
 export type Get_User_ProfileQueryVariables = {
-  profileHandle: Scalars['String']
+  profileHandle?: Maybe<Scalars['String']>
 };
 
 
@@ -428,7 +428,7 @@ export type Get_User_ProfileQuery = (
 
 
 export const Get_User_ProfileDocument = gql`
-    query GET_USER_PROFILE($profileHandle: String!) {
+    query GET_USER_PROFILE($profileHandle: String) {
   User(where: {profile_handle: {_eq: $profileHandle}}) {
     first_name
     last_name
