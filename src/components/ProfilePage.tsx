@@ -30,8 +30,6 @@ const ProfilePage = () => {
     return <div>error!</div>;
   }
 
-  console.log(data);
-
   // handle cases where user cannot be found or multiple users are returned (shouldn't happen)
   const { User: users } = data;
   if (users.length !== 1) {
@@ -61,7 +59,7 @@ const ProfilePage = () => {
           width: "100vw"
         }}
       />
-      <div className="new-contact">New contact added!</div>
+      {/* <div className="new-contact">New contact added!</div> */}
       <div className="profile-card">
         <div
           className="profile-pic"

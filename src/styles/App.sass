@@ -80,3 +80,25 @@
     font-size: 18px
     text-align: center
     width: 70vw
+
+.nav
+  position: fixed
+  bottom: 0
+  left: 0
+  width: 100vw
+  height: 70px
+  background-color: #EEE
+  display: flex
+  flex-direction: row
+  align-items: center
+
+  & a
+    flex-grow: 1
+    display: flex
+    align-items: center
+    justify-content: center
+    height: 100%
+
+    & svg
+      transform: scale(1.5)
+      color: #555
