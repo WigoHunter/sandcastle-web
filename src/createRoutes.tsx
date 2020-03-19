@@ -7,6 +7,7 @@ import StarredList from "./components/StarredList";
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "@apollo/react-hooks";
 import { GRAPHQL_ENDPOINT } from "./config";
+import Navigation from "./components/Navigation";
 
 const createRoutes = () => {
   const client = new ApolloClient({
@@ -27,6 +28,7 @@ const createRoutes = () => {
             <App />
           </Route>
         </Switch>
+        <Navigation />
       </Router>
     </ApolloProvider>
   );
