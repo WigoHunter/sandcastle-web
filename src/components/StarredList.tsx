@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component, useState, useEffect } from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { getUserProfile } from "../data/queries";
 import {
@@ -8,16 +8,22 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faStickyNote,
-  faStopwatch,
-  faSearch
+  faClock,
+  faSearch,
+  faSortAmountDown
 } from "@fortawesome/free-solid-svg-icons";
 
-const StarredList = () => {
+const StarredList: React.StatelessComponent = () => {
+
   const { loading, error, data } = useQuery<
     Get_User_ProfileQuery,
     Get_User_ProfileQueryVariables
   >(getUserProfile);
 
+  var all_users = data? data.User : [];
+  const [users, setUsers] = useState(all_users);
+
+  useEffect( ()=>{ setUsers(all_users) }, [all_users] );
   // handle loading
   if (loading) {
     return <div>loading...</div>;
@@ -29,9 +35,21 @@ const StarredList = () => {
     return <div>error!</div>;
   }
 
+  /* setUsers(all_users); */
+  var filtertext = "";
+
   // For demo: just display all users from database
   // TODO: only display starred contacts for current (logged in) user
-  const { User: users } = data;
+
+  const handleChange = (e: any)=> {
+    filtertext = e.target.value;
+    if(filtertext!=""){
+      setUsers( all_users.filter(function(u){ return u.first_name.includes(filtertext); }) ) ;
+    }
+    else{
+      setUsers(all_users);
+    }
+  }
 
   // Style variables
   const dark_color = "#333333";
@@ -42,9 +60,8 @@ const StarredList = () => {
   const accent_color = "#37d5e6";
   const shadow_color = "#c9d4d6";
   const entry_height = 100;
-  const profile_pic_size = 60;
+  const profile_pic_size = 55;
   const profile_pic_margin = 7;
-  const entry_margin_left = 5;
   const action_button_size = 40;
   const action_margin_right = 7;
 
@@ -58,6 +75,12 @@ const StarredList = () => {
           boxShadow: `0 5px 10px ${shadow_color}`
         }}
       >
+        <input
+          type="text"
+          className="input"
+          id="search-input"
+          placeholder="Search..."
+          onChange={handleChange}
         <div
           style={{
             fontWeight: "bold",
@@ -78,13 +101,19 @@ const StarredList = () => {
             alignItems: "center"
           }}
         >
+          <button id="search-btn" style={{ marginRight: "5px" }}>
+            <FontAwesomeIcon
+              icon={faSortAmountDown}
+              style={{ display: "block", fontSize: "22px", color: "white" }}
+            />
+          </button>
           <input
             type="text"
             className="input"
             id="search-input"
             placeholder="Search..."
             style={{
-              width: "70%",
+              width: "65%",
               padding: "7px 12px",
               fontSize: "18px",
               border: "none",
@@ -108,7 +137,7 @@ const StarredList = () => {
           margin: "20px 0 25px 0"
         }}
       >
-        — 1 result found for "Kevin" —
+        — {users.length} result found for "Kevin" —
       </p>
       {users.map(user => (
         <div
@@ -127,19 +156,18 @@ const StarredList = () => {
             className="user-entry-pic"
             style={{
               float: "left",
-              marginLeft: `${entry_margin_left}px`
+              margin: "0 3px"
             }}
           >
             <div
               className="profile-pic"
               style={{
-                background: `url(${user.profile_picture}) gray`,
-                backgroundSize: "cover",
+                backgroundImage: `url(${user.profile_picture})`,
+                backgroundSize: `cover`,
                 margin: `${profile_pic_margin}px`,
                 height: `${profile_pic_size}px`,
                 width: `${profile_pic_size}px`,
-                borderRadius: `${profile_pic_size / 2}px`,
-                filter: `drop-shadow(0 3px 3px ${shadow_color})`
+                borderRadius: `${profile_pic_size / 2}px`
               }}
             ></div>
           </div>
@@ -179,7 +207,7 @@ const StarredList = () => {
               height: `${entry_height}px`,
               display: "flex",
               justifyContent: "right",
-              marginTop: "7px"
+              marginTop: "3px"
             }}
           >
             <button
@@ -188,11 +216,11 @@ const StarredList = () => {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                border: `solid 1px ${light_color}`,
+                border: "none",
                 marginRight: `${action_margin_right}px`,
                 height: `${action_button_size}px`,
                 width: `${action_button_size}px`,
-                backgroundColor: "white",
+                backgroundColor: "rgba(46, 207, 185, 0.2)",
                 borderRadius: `${action_button_size / 2}px`,
               }}
             >
@@ -201,7 +229,7 @@ const StarredList = () => {
                 style={{
                   display: "block",
                   fontSize: "20px",
-                  color: `${dark_color}`
+                  color: `${main_color}`
                 }}
               />
             </button>
@@ -211,20 +239,20 @@ const StarredList = () => {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                border: `solid 1px ${light_color}`,
+                border: "none",
                 marginRight: `${action_margin_right}px`,
                 height: `${action_button_size}px`,
                 width: `${action_button_size}px`,
-                backgroundColor: "white",
+                backgroundColor: "rgba(55, 213, 230, 0.2)",
                 borderRadius: `${action_button_size / 2}px`,
               }}
             >
               <FontAwesomeIcon
-                icon={faStopwatch}
+                icon={faClock}
                 style={{
                   display: "block",
                   fontSize: "20px",
-                  color: `${dark_color}`
+                  color: `${accent_color}`
                 }}
               />
             </button>
