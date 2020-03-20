@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/react-hooks";
 import { getUserProfile } from "../data/queries";
@@ -6,9 +6,18 @@ import {
   Get_User_ProfileQuery,
   Get_User_ProfileQueryVariables
 } from "../generated/graphql";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLinkedin } from "@fortawesome/free-brands-svg-icons";
+import {
+  faStar,
+  faStickyNote,
+  faClock
+} from "@fortawesome/free-solid-svg-icons";
+import Iframe from "react-iframe";
 
 const ProfilePage = () => {
   const { id } = useParams();
+  const [starred, setStarred] = useState<Boolean>(false);
 
   const { loading, error, data } = useQuery<
     Get_User_ProfileQuery,
@@ -97,9 +106,39 @@ const ProfilePage = () => {
           <div>Email: kh736@cornell.edu</div>
         </div>
 
-        <div className="linkedin-button">Connect on LinkedIn</div>
+        <div className="linkedin-button">
+          <FontAwesomeIcon icon={faLinkedin} />
+          Connect on LinkedIn
+        </div>
       </div>
       {/* <div className="motto">{motto}</div> */}
+
+      <div className="actions">
+        <div
+          className={`action ${starred && "activated"}`}
+          onClick={() => setStarred(!starred)}
+        >
+          <FontAwesomeIcon icon={faStar} />
+        </div>
+        <div className="action">
+          <FontAwesomeIcon icon={faStickyNote} />
+        </div>
+        <div className="action">
+          <FontAwesomeIcon icon={faClock} />
+        </div>
+      </div>
+
+      <div className="met">
+        <p className="info">Met today at Cornell Tech</p>
+        <Iframe
+          width="300"
+          height="200"
+          url="https://maps.google.com/maps?width=300&amp;height=200&amp;hl=en&amp;q=Cornell Tech&amp;ie=UTF8&amp;t=&amp;z=14&amp;iwloc=B&amp;output=embed"
+          frameBorder={0}
+          position="relative"
+          scrolling="no"
+        />
+      </div>
     </div>
   );
 };
