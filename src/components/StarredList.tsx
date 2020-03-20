@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component, useState, useEffect } from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { getUserProfile } from "../data/queries";
 import {
@@ -12,12 +12,17 @@ import {
   faSearch
 } from "@fortawesome/free-solid-svg-icons";
 
-const StarredList = () => {
+const StarredList: React.StatelessComponent = () => {
+
   const { loading, error, data } = useQuery<
     Get_User_ProfileQuery,
     Get_User_ProfileQueryVariables
   >(getUserProfile);
 
+  var all_users = data? data.User : [];
+  const [users, setUsers] = useState(all_users);
+
+  useEffect( ()=>{ setUsers(all_users) }, [all_users] );
   // handle loading
   if (loading) {
     return <div>loading...</div>;
@@ -29,9 +34,21 @@ const StarredList = () => {
     return <div>error!</div>;
   }
 
+  /* setUsers(all_users); */
+  var filtertext = "";
+
   // For demo: just display all users from database
   // TODO: only display starred contacts for current (logged in) user
-  const { User: users } = data;
+
+  const handleChange = (e: any)=> {
+    filtertext = e.target.value;
+    if(filtertext!=""){
+      setUsers( all_users.filter(function(u){ return u.first_name.includes(filtertext); }) ) ;
+    }
+    else{
+      setUsers(all_users);
+    }
+  }
 
   // Style variables
   const light_color = "#555555";
@@ -59,6 +76,7 @@ const StarredList = () => {
           className="input"
           id="search-input"
           placeholder="Search..."
+          onChange={handleChange}
           style={{
             width: "70%",
             padding: "7px 12px",
@@ -82,7 +100,7 @@ const StarredList = () => {
           color: `${light_color}`
         }}
       >
-        — 1 result found for "Kevin" —
+        — {users.length} result found for "Kevin" —
       </p>
       {users.map(user => (
         <div
@@ -99,8 +117,8 @@ const StarredList = () => {
             <div
               className="profile-pic"
               style={{
-                background: `url(${user.profile_picture}) gray`,
-                backgroundSize: "cover",
+                backgroundImage: `url(${user.profile_picture})`,
+                backgroundSize: `cover`,
                 margin: `${profile_pic_margin}px`,
                 height: `${profile_pic_size}px`,
                 width: `${profile_pic_size}px`,
