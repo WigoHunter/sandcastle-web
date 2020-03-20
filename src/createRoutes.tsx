@@ -21,7 +21,7 @@ const createRoutes = () => {
           <Route path="/profile/:id">
             <ProfilePage />
           </Route>
-          <Route path="/starred">
+          <Route path="/list">
             <StarredList />
           </Route>
           <Route path="/">
