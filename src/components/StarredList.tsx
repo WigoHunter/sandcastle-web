@@ -93,12 +93,12 @@ const StarredList = () => {
             alignItems: "center"
           }}
         >
-          <button id="search-btn" style={{ marginRight: "5px" }}>
+          <div style={{ marginRight: "16px" }}>
             <FontAwesomeIcon
               icon={faSortAmountDown}
               style={{ display: "block", fontSize: "22px", color: "white" }}
             />
-          </button>
+          </div>
           <input
             type="text"
             className="input"
@@ -113,12 +113,12 @@ const StarredList = () => {
               borderRadius: "5px"
             }}
           />
-          <button id="search-btn" style={{ marginLeft: "5px" }}>
+          <div style={{ marginLeft: "16px" }}>
             <FontAwesomeIcon
               icon={faSearch}
               style={{ display: "block", fontSize: "22px", color: "white" }}
             />
-          </button>
+          </div>
         </div>
       </div>
       {filter !== "" && (
