@@ -53,8 +53,7 @@ const ProfilePage = () => {
     logo_image_url,
     address,
     title,
-    number,
-    motto
+    number
   } = users[0];
 
   return (
@@ -102,7 +101,7 @@ const ProfilePage = () => {
         <div className="contact">
           <div>Address: {address}</div>
           <div>Mobile: {number}</div>
-          {/* to fix */}
+          {/* to fix: hardcoded */}
           <div>Email: kh736@cornell.edu</div>
         </div>
 
@@ -129,6 +128,7 @@ const ProfilePage = () => {
       </div>
 
       <div className="met">
+        {/* to fix: hardcoded */}
         <p className="info">Met today at Cornell Tech</p>
         <Iframe
           width="300"
