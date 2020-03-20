@@ -8,6 +8,7 @@ import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "@apollo/react-hooks";
 import { GRAPHQL_ENDPOINT } from "./config";
 import Navigation from "./components/Navigation";
+import NoteList from "./components/NoteList";
 
 const createRoutes = () => {
   const client = new ApolloClient({
@@ -23,6 +24,9 @@ const createRoutes = () => {
           </Route>
           <Route path="/list">
             <StarredList />
+          </Route>
+          <Route path="/notes">
+            <NoteList />
           </Route>
           <Route path="/">
             <App />
