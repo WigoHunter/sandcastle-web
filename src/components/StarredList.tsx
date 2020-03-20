@@ -12,18 +12,15 @@ import {
   faSearch,
   faSortAmountDown
 } from "@fortawesome/free-solid-svg-icons";
+import { timeDiff } from "../utils";
 
-const StarredList: React.StatelessComponent = () => {
-
+const StarredList = () => {
   const { loading, error, data } = useQuery<
     Get_User_ProfileQuery,
     Get_User_ProfileQueryVariables
   >(getUserProfile);
+  const [filter, setFilter] = useState("");
 
-  var all_users = data? data.User : [];
-  const [users, setUsers] = useState(all_users);
-
-  useEffect( ()=>{ setUsers(all_users) }, [all_users] );
   // handle loading
   if (loading) {
     return <div>loading...</div>;
@@ -35,21 +32,10 @@ const StarredList: React.StatelessComponent = () => {
     return <div>error!</div>;
   }
 
-  /* setUsers(all_users); */
-  var filtertext = "";
-
-  // For demo: just display all users from database
-  // TODO: only display starred contacts for current (logged in) user
-
-  const handleChange = (e: any)=> {
-    filtertext = e.target.value;
-    if(filtertext!=""){
-      setUsers( all_users.filter(function(u){ return u.first_name.includes(filtertext); }) ) ;
-    }
-    else{
-      setUsers(all_users);
-    }
-  }
+  // filter text
+  const handleChange = (e: any) => {
+    setFilter(e.target.value.toLowerCase());
+  };
 
   // Style variables
   const dark_color = "#333333";
@@ -65,6 +51,18 @@ const StarredList: React.StatelessComponent = () => {
   const action_button_size = 40;
   const action_margin_right = 7;
 
+  // For demo: just display all users from database
+  // TODO: only display starred contacts for current (logged in) user
+  const users =
+    filter === ""
+      ? data.User
+      : data.User.filter(
+          user =>
+            user.first_name.toLowerCase().includes(filter) ||
+            (user.met_location &&
+              user.met_location.toLowerCase().includes(filter))
+        );
+
   return (
     <div className="list-container">
       <div
@@ -75,12 +73,6 @@ const StarredList: React.StatelessComponent = () => {
           boxShadow: `0 5px 10px ${shadow_color}`
         }}
       >
-        <input
-          type="text"
-          className="input"
-          id="search-input"
-          placeholder="Search..."
-          onChange={handleChange}
         <div
           style={{
             fontWeight: "bold",
@@ -112,6 +104,7 @@ const StarredList: React.StatelessComponent = () => {
             className="input"
             id="search-input"
             placeholder="Search..."
+            onChange={e => handleChange(e)}
             style={{
               width: "65%",
               padding: "7px 12px",
@@ -128,17 +121,19 @@ const StarredList: React.StatelessComponent = () => {
           </button>
         </div>
       </div>
-      <p
-        id="search-info"
-        style={{
-          textAlign: "center",
-          display: "show",
-          color: `${light_color}`,
-          margin: "20px 0 25px 0"
-        }}
-      >
-        — {users.length} result found for "Kevin" —
-      </p>
+      {filter !== "" && (
+        <p
+          id="search-info"
+          style={{
+            textAlign: "center",
+            display: "show",
+            color: `${light_color}`,
+            margin: "20px 0 25px 0"
+          }}
+        >
+          — {users.length} result found for "{filter}" —`
+        </p>
+      )}
       {users.map(user => (
         <div
           className="user-entry"
@@ -163,7 +158,7 @@ const StarredList: React.StatelessComponent = () => {
               className="profile-pic"
               style={{
                 backgroundImage: `url(${user.profile_picture})`,
-                backgroundSize: `cover`,
+                backgroundSize: "cover",
                 margin: `${profile_pic_margin}px`,
                 height: `${profile_pic_size}px`,
                 width: `${profile_pic_size}px`,
@@ -171,7 +166,10 @@ const StarredList: React.StatelessComponent = () => {
               }}
             ></div>
           </div>
-          <div className="user-entry-info" style={{ display: "inline-block" }}>
+          <div
+            className="user-entry-info"
+            style={{ display: "inline-block", width: "180px" }}
+          >
             <div
               style={{
                 fontSize: "24px",
@@ -196,8 +194,7 @@ const StarredList: React.StatelessComponent = () => {
                 marginTop: "3px"
               }}
             >
-              — met [duration] ago at [location]
-              {/* — met ${time_passed(user.met_time)} ago at ${user.met_location}. */}
+              — met {timeDiff(new Date(), user.met_time)} at {user.met_location}
             </div>
           </div>
           <div
@@ -221,7 +218,7 @@ const StarredList: React.StatelessComponent = () => {
                 height: `${action_button_size}px`,
                 width: `${action_button_size}px`,
                 backgroundColor: "rgba(46, 207, 185, 0.2)",
-                borderRadius: `${action_button_size / 2}px`,
+                borderRadius: `${action_button_size / 2}px`
               }}
             >
               <FontAwesomeIcon
@@ -244,7 +241,7 @@ const StarredList: React.StatelessComponent = () => {
                 height: `${action_button_size}px`,
                 width: `${action_button_size}px`,
                 backgroundColor: "rgba(55, 213, 230, 0.2)",
-                borderRadius: `${action_button_size / 2}px`,
+                borderRadius: `${action_button_size / 2}px`
               }}
             >
               <FontAwesomeIcon

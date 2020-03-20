@@ -17,6 +17,8 @@ export const getUserProfile = gql`
       motto
       cover_picture
       profile_handle
+      met_location
+      met_time
     }
   }
 `;

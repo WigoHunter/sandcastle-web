@@ -149,6 +149,8 @@ export type User = {
   last_name: Scalars['String'],
   linkedin_url?: Maybe<Scalars['String']>,
   logo_image_url?: Maybe<Scalars['String']>,
+  met_location?: Maybe<Scalars['String']>,
+  met_time?: Maybe<Scalars['timestamptz']>,
   motto?: Maybe<Scalars['String']>,
   number?: Maybe<Scalars['String']>,
   profile_handle?: Maybe<Scalars['String']>,
@@ -201,6 +203,8 @@ export type User_Bool_Exp = {
   last_name?: Maybe<String_Comparison_Exp>,
   linkedin_url?: Maybe<String_Comparison_Exp>,
   logo_image_url?: Maybe<String_Comparison_Exp>,
+  met_location?: Maybe<String_Comparison_Exp>,
+  met_time?: Maybe<Timestamptz_Comparison_Exp>,
   motto?: Maybe<String_Comparison_Exp>,
   number?: Maybe<String_Comparison_Exp>,
   profile_handle?: Maybe<String_Comparison_Exp>,
@@ -225,6 +229,8 @@ export type User_Insert_Input = {
   last_name?: Maybe<Scalars['String']>,
   linkedin_url?: Maybe<Scalars['String']>,
   logo_image_url?: Maybe<Scalars['String']>,
+  met_location?: Maybe<Scalars['String']>,
+  met_time?: Maybe<Scalars['timestamptz']>,
   motto?: Maybe<Scalars['String']>,
   number?: Maybe<Scalars['String']>,
   profile_handle?: Maybe<Scalars['String']>,
@@ -244,6 +250,8 @@ export type User_Max_Fields = {
   last_name?: Maybe<Scalars['String']>,
   linkedin_url?: Maybe<Scalars['String']>,
   logo_image_url?: Maybe<Scalars['String']>,
+  met_location?: Maybe<Scalars['String']>,
+  met_time?: Maybe<Scalars['timestamptz']>,
   motto?: Maybe<Scalars['String']>,
   number?: Maybe<Scalars['String']>,
   profile_handle?: Maybe<Scalars['String']>,
@@ -262,6 +270,8 @@ export type User_Max_Order_By = {
   last_name?: Maybe<Order_By>,
   linkedin_url?: Maybe<Order_By>,
   logo_image_url?: Maybe<Order_By>,
+  met_location?: Maybe<Order_By>,
+  met_time?: Maybe<Order_By>,
   motto?: Maybe<Order_By>,
   number?: Maybe<Order_By>,
   profile_handle?: Maybe<Order_By>,
@@ -281,6 +291,8 @@ export type User_Min_Fields = {
   last_name?: Maybe<Scalars['String']>,
   linkedin_url?: Maybe<Scalars['String']>,
   logo_image_url?: Maybe<Scalars['String']>,
+  met_location?: Maybe<Scalars['String']>,
+  met_time?: Maybe<Scalars['timestamptz']>,
   motto?: Maybe<Scalars['String']>,
   number?: Maybe<Scalars['String']>,
   profile_handle?: Maybe<Scalars['String']>,
@@ -299,6 +311,8 @@ export type User_Min_Order_By = {
   last_name?: Maybe<Order_By>,
   linkedin_url?: Maybe<Order_By>,
   logo_image_url?: Maybe<Order_By>,
+  met_location?: Maybe<Order_By>,
+  met_time?: Maybe<Order_By>,
   motto?: Maybe<Order_By>,
   number?: Maybe<Order_By>,
   profile_handle?: Maybe<Order_By>,
@@ -335,6 +349,8 @@ export type User_Order_By = {
   last_name?: Maybe<Order_By>,
   linkedin_url?: Maybe<Order_By>,
   logo_image_url?: Maybe<Order_By>,
+  met_location?: Maybe<Order_By>,
+  met_time?: Maybe<Order_By>,
   motto?: Maybe<Order_By>,
   number?: Maybe<Order_By>,
   profile_handle?: Maybe<Order_By>,
@@ -354,6 +370,8 @@ export enum User_Select_Column {
   LastName = 'last_name',
   LinkedinUrl = 'linkedin_url',
   LogoImageUrl = 'logo_image_url',
+  MetLocation = 'met_location',
+  MetTime = 'met_time',
   Motto = 'motto',
   Number = 'number',
   ProfileHandle = 'profile_handle',
@@ -373,6 +391,8 @@ export type User_Set_Input = {
   last_name?: Maybe<Scalars['String']>,
   linkedin_url?: Maybe<Scalars['String']>,
   logo_image_url?: Maybe<Scalars['String']>,
+  met_location?: Maybe<Scalars['String']>,
+  met_time?: Maybe<Scalars['timestamptz']>,
   motto?: Maybe<Scalars['String']>,
   number?: Maybe<Scalars['String']>,
   profile_handle?: Maybe<Scalars['String']>,
@@ -392,6 +412,8 @@ export enum User_Update_Column {
   LastName = 'last_name',
   LinkedinUrl = 'linkedin_url',
   LogoImageUrl = 'logo_image_url',
+  MetLocation = 'met_location',
+  MetTime = 'met_time',
   Motto = 'motto',
   Number = 'number',
   ProfileHandle = 'profile_handle',
@@ -422,7 +444,7 @@ export type Get_User_ProfileQuery = (
   { __typename?: 'query_root' }
   & { User: Array<(
     { __typename?: 'User' }
-    & Pick<User, 'first_name' | 'last_name' | 'company' | 'title' | 'address' | 'logo_image_url' | 'number' | 'website_url' | 'linkedin_url' | 'facebook_url' | 'profile_picture' | 'motto' | 'cover_picture' | 'profile_handle'>
+    & Pick<User, 'first_name' | 'last_name' | 'company' | 'title' | 'address' | 'logo_image_url' | 'number' | 'website_url' | 'linkedin_url' | 'facebook_url' | 'profile_picture' | 'motto' | 'cover_picture' | 'profile_handle' | 'met_location' | 'met_time'>
   )> }
 );
 
@@ -444,6 +466,8 @@ export const Get_User_ProfileDocument = gql`
     motto
     cover_picture
     profile_handle
+    met_location
+    met_time
   }
 }
     `;
