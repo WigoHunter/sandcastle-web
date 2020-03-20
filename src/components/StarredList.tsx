@@ -8,7 +8,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faStickyNote,
-  faStopwatch,
+  faClock,
   faSearch,
   faSortAmountDown
 } from "@fortawesome/free-solid-svg-icons";
@@ -225,7 +225,7 @@ const StarredList = () => {
               }}
             >
               <FontAwesomeIcon
-                icon={faStopwatch}
+                icon={faClock}
                 style={{
                   display: "block",
                   fontSize: "20px",
