@@ -5,7 +5,7 @@ import {
   faUserCircle,
   faAddressBook,
   faStickyNote,
-  faStopwatch
+  faClock
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 
@@ -41,7 +41,7 @@ const Navigation = (props: RouteComponentProps) => {
         to="/reminders"
         className={`${pathname.startsWith("/reminders") && "active"}`}
       >
-        <FontAwesomeIcon icon={faStopwatch} />
+        <FontAwesomeIcon icon={faClock} />
       </Link>
     </div>
   );
