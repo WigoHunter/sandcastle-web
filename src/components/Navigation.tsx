@@ -1,26 +1,50 @@
 import React from "react";
+import { withRouter, RouteComponentProps } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faUserCircle,
   faAddressBook,
-  faStickyNote
+  faStickyNote,
+  faStopwatch
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 
-const Navigation = () => (
-  <div className="nav">
-    <Link to="/profile/kevin">
-      <FontAwesomeIcon icon={faUserCircle} />
-    </Link>
+const Navigation = (props: RouteComponentProps) => {
+  const {
+    location: { pathname }
+  } = props;
 
-    <Link to="/list">
-      <FontAwesomeIcon icon={faAddressBook} />
-    </Link>
+  return (
+    <div className="nav">
+      <Link
+        to="/profile/kevin"
+        className={`${pathname.startsWith("/profile") && "active"}`}
+      >
+        <FontAwesomeIcon icon={faUserCircle} />
+      </Link>
 
-    <Link to="/notes">
-      <FontAwesomeIcon icon={faStickyNote} />
-    </Link>
-  </div>
-);
+      <Link
+        to="/list"
+        className={`${pathname.startsWith("/list") && "active"}`}
+      >
+        <FontAwesomeIcon icon={faAddressBook} />
+      </Link>
 
-export default Navigation;
+      <Link
+        to="/notes"
+        className={`${pathname.startsWith("/notes") && "active"}`}
+      >
+        <FontAwesomeIcon icon={faStickyNote} />
+      </Link>
+
+      <Link
+        to="/reminders"
+        className={`${pathname.startsWith("/reminders") && "active"}`}
+      >
+        <FontAwesomeIcon icon={faStopwatch} />
+      </Link>
+    </div>
+  );
+};
+
+export default withRouter(Navigation);
