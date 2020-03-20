@@ -96,8 +96,10 @@ const ProfilePage = () => {
           {/* to fix */}
           <div>Email: kh736@cornell.edu</div>
         </div>
+
+        <div className="linkedin-button">Connect on LinkedIn</div>
       </div>
-      <div className="motto">{motto}</div>
+      {/* <div className="motto">{motto}</div> */}
     </div>
   );
 };
