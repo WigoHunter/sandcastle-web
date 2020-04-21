@@ -1,5 +1,7 @@
 import React from "react";
 import Note from "./Note";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSortAmountDown } from "@fortawesome/free-solid-svg-icons";
 
 const fakeNotes = [
   {
@@ -12,26 +14,32 @@ const fakeNotes = [
   {
     note: "Um he owes me $50 dinner",
     image:
-      "https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-9/89383283_3522271591177615_7711558916055760896_o.jpg?_nc_cat=109&_nc_sid=09cbfe&_nc_ohc=zGQeadFYBIEAX8H0ajt&_nc_ht=scontent-lga3-1.xx&oh=af4008e6aea3e4f0806a2410315bab94&oe=5E9A8069",
-    name: "Brian",
+      "https://imgur.com/UUZo2Cw.png",
+    name: "Brian Ho",
     date: "2020/03/17"
   },
   {
     note:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
     image:
-      "https://scontent-lga3-1.xx.fbcdn.net/v/t31.0-8/18738438_10208282747659679_799164071551895728_o.jpg?_nc_cat=103&_nc_sid=09cbfe&_nc_ohc=nSclFi8CQ-8AX85wG68&_nc_ht=scontent-lga3-1.xx&oh=a388da43ab68973c66c46c8b5af1d5f2&oe=5E9B49B8",
+      "https://imgur.com/wj9h2OW.png",
     name: "George Lin",
     date: "2020/03/17"
   }
 ];
 
 const NoteList = () => (
-  <div className="notelist">
+  <div className="notes">
+    <div className="top-bar">
+      <div className="title">NOTES</div>
+      <div className="line"></div>
+    </div>
     <h4>Notes</h4>
-    {fakeNotes.map((note, i) => (
-      <Note key={i} {...note} />
-    ))}
+    <div className="notes-list">
+      {fakeNotes.map((note, i) => (
+        <Note key={i} {...note} />
+      ))}
+    </div>
   </div>
 );
 

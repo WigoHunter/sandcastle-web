@@ -1,6 +1,10 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit, faClock, faTrash } from "@fortawesome/free-solid-svg-icons";
+import {
+  faEdit,
+  faClock,
+  faTrash
+} from "@fortawesome/free-solid-svg-icons";
 
 // to be replaced by graphql types
 interface Props {
@@ -18,8 +22,8 @@ const Note = (props: Props) => {
       <div
         className="pic"
         style={{
-          width: "30px",
-          height: "30px",
+          width: "50px",
+          height: "50px",
           background: `url(${image})`,
           backgroundSize: "cover"
         }}
